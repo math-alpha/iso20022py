@@ -1,0 +1,970 @@
+{
+    "$schema": "http://json-schema.org/draft/2020-12/schema",
+    "$id": "urn:iso:std:iso:20022:tech:xsd:pain.008.001.02#",
+    "properties": {
+        "Document": {"$ref": "#/$defs/Document"}
+    },
+    "$defs": {
+        "Authorisation1Choice": {
+            "type": "object",
+            "required": [
+                "Cd",
+                "Prtry"
+            ],
+            "properties": {
+                "Cd": {"$ref": "#/$defs/Authorisation1Code"},
+                "Prtry": {"type": "string"}
+            }
+        },
+        "PostalAddress6": {
+            "type": "object",
+            "properties": {
+                "AdrTp": {"$ref": "#/$defs/AddressType2Code"},
+                "Dept": {"type": "string"},
+                "SubDept": {"type": "string"},
+                "StrtNm": {"type": "string"},
+                "BldgNb": {"type": "string"},
+                "PstCd": {"type": "string"},
+                "TwnNm": {"type": "string"},
+                "CtrySubDvsn": {"type": "string"},
+                "Ctry": {"type": "string"},
+                "AdrLine": {
+                    "type": "array",
+                    "items": {"type": "string"},
+                    "maxItems": 7,
+                    "minItems": 0
+                }
+            }
+        },
+        "OrganisationIdentificationSchemeName1Choice": {
+            "type": "object",
+            "required": [
+                "Cd",
+                "Prtry"
+            ],
+            "properties": {
+                "Cd": {"type": "string"},
+                "Prtry": {"type": "string"}
+            }
+        },
+        "GenericOrganisationIdentification1": {
+            "type": "object",
+            "required": ["Id"],
+            "properties": {
+                "Id": {"type": "string"},
+                "SchmeNm": {"$ref": "#/$defs/OrganisationIdentificationSchemeName1Choice"},
+                "Issr": {"type": "string"}
+            }
+        },
+        "OrganisationIdentification4": {
+            "type": "object",
+            "properties": {
+                "BICOrBEI": {"type": "string"},
+                "Othr": {
+                    "type": "array",
+                    "items": {"$ref": "#/$defs/GenericOrganisationIdentification1"},
+                    "minItems": 0
+                }
+            }
+        },
+        "DateAndPlaceOfBirth": {
+            "type": "object",
+            "required": [
+                "BirthDt",
+                "CityOfBirth",
+                "CtryOfBirth"
+            ],
+            "properties": {
+                "BirthDt": {
+                    "type": "string",
+                    "format": "date"
+                },
+                "PrvcOfBirth": {"type": "string"},
+                "CityOfBirth": {"type": "string"},
+                "CtryOfBirth": {"type": "string"}
+            }
+        },
+        "PersonIdentificationSchemeName1Choice": {
+            "type": "object",
+            "required": [
+                "Cd",
+                "Prtry"
+            ],
+            "properties": {
+                "Cd": {"type": "string"},
+                "Prtry": {"type": "string"}
+            }
+        },
+        "GenericPersonIdentification1": {
+            "type": "object",
+            "required": ["Id"],
+            "properties": {
+                "Id": {"type": "string"},
+                "SchmeNm": {"$ref": "#/$defs/PersonIdentificationSchemeName1Choice"},
+                "Issr": {"type": "string"}
+            }
+        },
+        "PersonIdentification5": {
+            "type": "object",
+            "properties": {
+                "DtAndPlcOfBirth": {"$ref": "#/$defs/DateAndPlaceOfBirth"},
+                "Othr": {
+                    "type": "array",
+                    "items": {"$ref": "#/$defs/GenericPersonIdentification1"},
+                    "minItems": 0
+                }
+            }
+        },
+        "Party6Choice": {
+            "type": "object",
+            "required": [
+                "OrgId",
+                "PrvtId"
+            ],
+            "properties": {
+                "OrgId": {"$ref": "#/$defs/OrganisationIdentification4"},
+                "PrvtId": {"$ref": "#/$defs/PersonIdentification5"}
+            }
+        },
+        "ContactDetails2": {
+            "type": "object",
+            "properties": {
+                "NmPrfx": {"$ref": "#/$defs/NamePrefix1Code"},
+                "Nm": {"type": "string"},
+                "PhneNb": {"type": "string"},
+                "MobNb": {"type": "string"},
+                "FaxNb": {"type": "string"},
+                "EmailAdr": {"type": "string"},
+                "Othr": {"type": "string"}
+            }
+        },
+        "PartyIdentification32": {
+            "type": "object",
+            "properties": {
+                "Nm": {"type": "string"},
+                "PstlAdr": {"$ref": "#/$defs/PostalAddress6"},
+                "Id": {"$ref": "#/$defs/Party6Choice"},
+                "CtryOfRes": {"type": "string"},
+                "CtctDtls": {"$ref": "#/$defs/ContactDetails2"}
+            }
+        },
+        "ClearingSystemIdentification2Choice": {
+            "type": "object",
+            "required": [
+                "Cd",
+                "Prtry"
+            ],
+            "properties": {
+                "Cd": {"type": "string"},
+                "Prtry": {"type": "string"}
+            }
+        },
+        "ClearingSystemMemberIdentification2": {
+            "type": "object",
+            "required": ["MmbId"],
+            "properties": {
+                "ClrSysId": {"$ref": "#/$defs/ClearingSystemIdentification2Choice"},
+                "MmbId": {"type": "string"}
+            }
+        },
+        "FinancialIdentificationSchemeName1Choice": {
+            "type": "object",
+            "required": [
+                "Cd",
+                "Prtry"
+            ],
+            "properties": {
+                "Cd": {"type": "string"},
+                "Prtry": {"type": "string"}
+            }
+        },
+        "GenericFinancialIdentification1": {
+            "type": "object",
+            "required": ["Id"],
+            "properties": {
+                "Id": {"type": "string"},
+                "SchmeNm": {"$ref": "#/$defs/FinancialIdentificationSchemeName1Choice"},
+                "Issr": {"type": "string"}
+            }
+        },
+        "FinancialInstitutionIdentification7": {
+            "type": "object",
+            "properties": {
+                "BIC": {"type": "string"},
+                "ClrSysMmbId": {"$ref": "#/$defs/ClearingSystemMemberIdentification2"},
+                "Nm": {"type": "string"},
+                "PstlAdr": {"$ref": "#/$defs/PostalAddress6"},
+                "Othr": {"$ref": "#/$defs/GenericFinancialIdentification1"}
+            }
+        },
+        "BranchData2": {
+            "type": "object",
+            "properties": {
+                "Id": {"type": "string"},
+                "Nm": {"type": "string"},
+                "PstlAdr": {"$ref": "#/$defs/PostalAddress6"}
+            }
+        },
+        "BranchAndFinancialInstitutionIdentification4": {
+            "type": "object",
+            "required": ["FinInstnId"],
+            "properties": {
+                "FinInstnId": {"$ref": "#/$defs/FinancialInstitutionIdentification7"},
+                "BrnchId": {"$ref": "#/$defs/BranchData2"}
+            }
+        },
+        "GroupHeader39": {
+            "type": "object",
+            "required": [
+                "MsgId",
+                "CreDtTm",
+                "NbOfTxs",
+                "InitgPty"
+            ],
+            "properties": {
+                "MsgId": {"type": "string"},
+                "CreDtTm": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "Authstn": {
+                    "type": "array",
+                    "items": {"$ref": "#/$defs/Authorisation1Choice"},
+                    "maxItems": 2,
+                    "minItems": 0
+                },
+                "NbOfTxs": {"type": "string"},
+                "CtrlSum": {"type": "number"},
+                "InitgPty": {"$ref": "#/$defs/PartyIdentification32"},
+                "FwdgAgt": {"$ref": "#/$defs/BranchAndFinancialInstitutionIdentification4"}
+            }
+        },
+        "ServiceLevel8Choice": {
+            "type": "object",
+            "required": [
+                "Cd",
+                "Prtry"
+            ],
+            "properties": {
+                "Cd": {"type": "string"},
+                "Prtry": {"type": "string"}
+            }
+        },
+        "LocalInstrument2Choice": {
+            "type": "object",
+            "required": [
+                "Cd",
+                "Prtry"
+            ],
+            "properties": {
+                "Cd": {"type": "string"},
+                "Prtry": {"type": "string"}
+            }
+        },
+        "CategoryPurpose1Choice": {
+            "type": "object",
+            "required": [
+                "Cd",
+                "Prtry"
+            ],
+            "properties": {
+                "Cd": {"type": "string"},
+                "Prtry": {"type": "string"}
+            }
+        },
+        "PaymentTypeInformation20": {
+            "type": "object",
+            "properties": {
+                "InstrPrty": {"$ref": "#/$defs/Priority2Code"},
+                "SvcLvl": {"$ref": "#/$defs/ServiceLevel8Choice"},
+                "LclInstrm": {"$ref": "#/$defs/LocalInstrument2Choice"},
+                "SeqTp": {"$ref": "#/$defs/SequenceType1Code"},
+                "CtgyPurp": {"$ref": "#/$defs/CategoryPurpose1Choice"}
+            }
+        },
+        "AccountSchemeName1Choice": {
+            "type": "object",
+            "required": [
+                "Cd",
+                "Prtry"
+            ],
+            "properties": {
+                "Cd": {"type": "string"},
+                "Prtry": {"type": "string"}
+            }
+        },
+        "GenericAccountIdentification1": {
+            "type": "object",
+            "required": ["Id"],
+            "properties": {
+                "Id": {"type": "string"},
+                "SchmeNm": {"$ref": "#/$defs/AccountSchemeName1Choice"},
+                "Issr": {"type": "string"}
+            }
+        },
+        "AccountIdentification4Choice": {
+            "type": "object",
+            "required": [
+                "IBAN",
+                "Othr"
+            ],
+            "properties": {
+                "IBAN": {"type": "string"},
+                "Othr": {"$ref": "#/$defs/GenericAccountIdentification1"}
+            }
+        },
+        "CashAccountType2": {
+            "type": "object",
+            "required": [
+                "Cd",
+                "Prtry"
+            ],
+            "properties": {
+                "Cd": {"$ref": "#/$defs/CashAccountType4Code"},
+                "Prtry": {"type": "string"}
+            }
+        },
+        "CashAccount16": {
+            "type": "object",
+            "required": ["Id"],
+            "properties": {
+                "Id": {"$ref": "#/$defs/AccountIdentification4Choice"},
+                "Tp": {"$ref": "#/$defs/CashAccountType2"},
+                "Ccy": {"type": "string"},
+                "Nm": {"type": "string"}
+            }
+        },
+        "PaymentIdentification1": {
+            "type": "object",
+            "required": ["EndToEndId"],
+            "properties": {
+                "InstrId": {"type": "string"},
+                "EndToEndId": {"type": "string"}
+            }
+        },
+        "ActiveOrHistoricCurrencyAndAmount": {
+            "type": "object",
+            "required": ["Ccy"],
+            "properties": {
+                "Value": {"type": "number"},
+                "Ccy": {"type": "string"}
+            }
+        },
+        "AmendmentInformationDetails6": {
+            "type": "object",
+            "properties": {
+                "OrgnlMndtId": {"type": "string"},
+                "OrgnlCdtrSchmeId": {"$ref": "#/$defs/PartyIdentification32"},
+                "OrgnlCdtrAgt": {"$ref": "#/$defs/BranchAndFinancialInstitutionIdentification4"},
+                "OrgnlCdtrAgtAcct": {"$ref": "#/$defs/CashAccount16"},
+                "OrgnlDbtr": {"$ref": "#/$defs/PartyIdentification32"},
+                "OrgnlDbtrAcct": {"$ref": "#/$defs/CashAccount16"},
+                "OrgnlDbtrAgt": {"$ref": "#/$defs/BranchAndFinancialInstitutionIdentification4"},
+                "OrgnlDbtrAgtAcct": {"$ref": "#/$defs/CashAccount16"},
+                "OrgnlFnlColltnDt": {
+                    "type": "string",
+                    "format": "date"
+                },
+                "OrgnlFrqcy": {"$ref": "#/$defs/Frequency1Code"}
+            }
+        },
+        "MandateRelatedInformation6": {
+            "type": "object",
+            "properties": {
+                "MndtId": {"type": "string"},
+                "DtOfSgntr": {
+                    "type": "string",
+                    "format": "date"
+                },
+                "AmdmntInd": {"type": "boolean"},
+                "AmdmntInfDtls": {"$ref": "#/$defs/AmendmentInformationDetails6"},
+                "ElctrncSgntr": {"type": "string"},
+                "FrstColltnDt": {
+                    "type": "string",
+                    "format": "date"
+                },
+                "FnlColltnDt": {
+                    "type": "string",
+                    "format": "date"
+                },
+                "Frqcy": {"$ref": "#/$defs/Frequency1Code"}
+            }
+        },
+        "DirectDebitTransaction6": {
+            "type": "object",
+            "properties": {
+                "MndtRltdInf": {"$ref": "#/$defs/MandateRelatedInformation6"},
+                "CdtrSchmeId": {"$ref": "#/$defs/PartyIdentification32"},
+                "PreNtfctnId": {"type": "string"},
+                "PreNtfctnDt": {
+                    "type": "string",
+                    "format": "date"
+                }
+            }
+        },
+        "Purpose2Choice": {
+            "type": "object",
+            "required": [
+                "Cd",
+                "Prtry"
+            ],
+            "properties": {
+                "Cd": {"type": "string"},
+                "Prtry": {"type": "string"}
+            }
+        },
+        "RegulatoryAuthority2": {
+            "type": "object",
+            "properties": {
+                "Nm": {"type": "string"},
+                "Ctry": {"type": "string"}
+            }
+        },
+        "StructuredRegulatoryReporting3": {
+            "type": "object",
+            "properties": {
+                "Tp": {"type": "string"},
+                "Dt": {
+                    "type": "string",
+                    "format": "date"
+                },
+                "Ctry": {"type": "string"},
+                "Cd": {"type": "string"},
+                "Amt": {"$ref": "#/$defs/ActiveOrHistoricCurrencyAndAmount"},
+                "Inf": {
+                    "type": "array",
+                    "items": {"type": "string"},
+                    "minItems": 0
+                }
+            }
+        },
+        "RegulatoryReporting3": {
+            "type": "object",
+            "properties": {
+                "DbtCdtRptgInd": {"$ref": "#/$defs/RegulatoryReportingType1Code"},
+                "Authrty": {"$ref": "#/$defs/RegulatoryAuthority2"},
+                "Dtls": {
+                    "type": "array",
+                    "items": {"$ref": "#/$defs/StructuredRegulatoryReporting3"},
+                    "minItems": 0
+                }
+            }
+        },
+        "TaxParty1": {
+            "type": "object",
+            "properties": {
+                "TaxId": {"type": "string"},
+                "RegnId": {"type": "string"},
+                "TaxTp": {"type": "string"}
+            }
+        },
+        "TaxAuthorisation1": {
+            "type": "object",
+            "properties": {
+                "Titl": {"type": "string"},
+                "Nm": {"type": "string"}
+            }
+        },
+        "TaxParty2": {
+            "type": "object",
+            "properties": {
+                "TaxId": {"type": "string"},
+                "RegnId": {"type": "string"},
+                "TaxTp": {"type": "string"},
+                "Authstn": {"$ref": "#/$defs/TaxAuthorisation1"}
+            }
+        },
+        "DatePeriodDetails": {
+            "type": "object",
+            "required": [
+                "FrDt",
+                "ToDt"
+            ],
+            "properties": {
+                "FrDt": {
+                    "type": "string",
+                    "format": "date"
+                },
+                "ToDt": {
+                    "type": "string",
+                    "format": "date"
+                }
+            }
+        },
+        "TaxPeriod1": {
+            "type": "object",
+            "properties": {
+                "Yr": {
+                    "type": "string",
+                    "format": "date"
+                },
+                "Tp": {"$ref": "#/$defs/TaxRecordPeriod1Code"},
+                "FrToDt": {"$ref": "#/$defs/DatePeriodDetails"}
+            }
+        },
+        "TaxRecordDetails1": {
+            "type": "object",
+            "required": ["Amt"],
+            "properties": {
+                "Prd": {"$ref": "#/$defs/TaxPeriod1"},
+                "Amt": {"$ref": "#/$defs/ActiveOrHistoricCurrencyAndAmount"}
+            }
+        },
+        "TaxAmount1": {
+            "type": "object",
+            "properties": {
+                "Rate": {"type": "number"},
+                "TaxblBaseAmt": {"$ref": "#/$defs/ActiveOrHistoricCurrencyAndAmount"},
+                "TtlAmt": {"$ref": "#/$defs/ActiveOrHistoricCurrencyAndAmount"},
+                "Dtls": {
+                    "type": "array",
+                    "items": {"$ref": "#/$defs/TaxRecordDetails1"},
+                    "minItems": 0
+                }
+            }
+        },
+        "TaxRecord1": {
+            "type": "object",
+            "properties": {
+                "Tp": {"type": "string"},
+                "Ctgy": {"type": "string"},
+                "CtgyDtls": {"type": "string"},
+                "DbtrSts": {"type": "string"},
+                "CertId": {"type": "string"},
+                "FrmsCd": {"type": "string"},
+                "Prd": {"$ref": "#/$defs/TaxPeriod1"},
+                "TaxAmt": {"$ref": "#/$defs/TaxAmount1"},
+                "AddtlInf": {"type": "string"}
+            }
+        },
+        "TaxInformation3": {
+            "type": "object",
+            "properties": {
+                "Cdtr": {"$ref": "#/$defs/TaxParty1"},
+                "Dbtr": {"$ref": "#/$defs/TaxParty2"},
+                "AdmstnZn": {"type": "string"},
+                "RefNb": {"type": "string"},
+                "Mtd": {"type": "string"},
+                "TtlTaxblBaseAmt": {"$ref": "#/$defs/ActiveOrHistoricCurrencyAndAmount"},
+                "TtlTaxAmt": {"$ref": "#/$defs/ActiveOrHistoricCurrencyAndAmount"},
+                "Dt": {
+                    "type": "string",
+                    "format": "date"
+                },
+                "SeqNb": {"type": "number"},
+                "Rcrd": {
+                    "type": "array",
+                    "items": {"$ref": "#/$defs/TaxRecord1"},
+                    "minItems": 0
+                }
+            }
+        },
+        "NameAndAddress10": {
+            "type": "object",
+            "required": [
+                "Nm",
+                "Adr"
+            ],
+            "properties": {
+                "Nm": {"type": "string"},
+                "Adr": {"$ref": "#/$defs/PostalAddress6"}
+            }
+        },
+        "RemittanceLocation2": {
+            "type": "object",
+            "properties": {
+                "RmtId": {"type": "string"},
+                "RmtLctnMtd": {"$ref": "#/$defs/RemittanceLocationMethod2Code"},
+                "RmtLctnElctrncAdr": {"type": "string"},
+                "RmtLctnPstlAdr": {"$ref": "#/$defs/NameAndAddress10"}
+            }
+        },
+        "ReferredDocumentType1Choice": {
+            "type": "object",
+            "required": [
+                "Cd",
+                "Prtry"
+            ],
+            "properties": {
+                "Cd": {"$ref": "#/$defs/DocumentType5Code"},
+                "Prtry": {"type": "string"}
+            }
+        },
+        "ReferredDocumentType2": {
+            "type": "object",
+            "required": ["CdOrPrtry"],
+            "properties": {
+                "CdOrPrtry": {"$ref": "#/$defs/ReferredDocumentType1Choice"},
+                "Issr": {"type": "string"}
+            }
+        },
+        "ReferredDocumentInformation3": {
+            "type": "object",
+            "properties": {
+                "Tp": {"$ref": "#/$defs/ReferredDocumentType2"},
+                "Nb": {"type": "string"},
+                "RltdDt": {
+                    "type": "string",
+                    "format": "date"
+                }
+            }
+        },
+        "DocumentAdjustment1": {
+            "type": "object",
+            "required": ["Amt"],
+            "properties": {
+                "Amt": {"$ref": "#/$defs/ActiveOrHistoricCurrencyAndAmount"},
+                "CdtDbtInd": {"$ref": "#/$defs/CreditDebitCode"},
+                "Rsn": {"type": "string"},
+                "AddtlInf": {"type": "string"}
+            }
+        },
+        "RemittanceAmount1": {
+            "type": "object",
+            "properties": {
+                "DuePyblAmt": {"$ref": "#/$defs/ActiveOrHistoricCurrencyAndAmount"},
+                "DscntApldAmt": {"$ref": "#/$defs/ActiveOrHistoricCurrencyAndAmount"},
+                "CdtNoteAmt": {"$ref": "#/$defs/ActiveOrHistoricCurrencyAndAmount"},
+                "TaxAmt": {"$ref": "#/$defs/ActiveOrHistoricCurrencyAndAmount"},
+                "AdjstmntAmtAndRsn": {
+                    "type": "array",
+                    "items": {"$ref": "#/$defs/DocumentAdjustment1"},
+                    "minItems": 0
+                },
+                "RmtdAmt": {"$ref": "#/$defs/ActiveOrHistoricCurrencyAndAmount"}
+            }
+        },
+        "CreditorReferenceType1Choice": {
+            "type": "object",
+            "required": [
+                "Cd",
+                "Prtry"
+            ],
+            "properties": {
+                "Cd": {"$ref": "#/$defs/DocumentType3Code"},
+                "Prtry": {"type": "string"}
+            }
+        },
+        "CreditorReferenceType2": {
+            "type": "object",
+            "required": ["CdOrPrtry"],
+            "properties": {
+                "CdOrPrtry": {"$ref": "#/$defs/CreditorReferenceType1Choice"},
+                "Issr": {"type": "string"}
+            }
+        },
+        "CreditorReferenceInformation2": {
+            "type": "object",
+            "properties": {
+                "Tp": {"$ref": "#/$defs/CreditorReferenceType2"},
+                "Ref": {"type": "string"}
+            }
+        },
+        "StructuredRemittanceInformation7": {
+            "type": "object",
+            "properties": {
+                "RfrdDocInf": {
+                    "type": "array",
+                    "items": {"$ref": "#/$defs/ReferredDocumentInformation3"},
+                    "minItems": 0
+                },
+                "RfrdDocAmt": {"$ref": "#/$defs/RemittanceAmount1"},
+                "CdtrRefInf": {"$ref": "#/$defs/CreditorReferenceInformation2"},
+                "Invcr": {"$ref": "#/$defs/PartyIdentification32"},
+                "Invcee": {"$ref": "#/$defs/PartyIdentification32"},
+                "AddtlRmtInf": {
+                    "type": "array",
+                    "items": {"type": "string"},
+                    "maxItems": 3,
+                    "minItems": 0
+                }
+            }
+        },
+        "RemittanceInformation5": {
+            "type": "object",
+            "properties": {
+                "Ustrd": {
+                    "type": "array",
+                    "items": {"type": "string"},
+                    "minItems": 0
+                },
+                "Strd": {
+                    "type": "array",
+                    "items": {"$ref": "#/$defs/StructuredRemittanceInformation7"},
+                    "minItems": 0
+                }
+            }
+        },
+        "DirectDebitTransactionInformation9": {
+            "type": "object",
+            "required": [
+                "PmtId",
+                "InstdAmt",
+                "DbtrAgt",
+                "Dbtr",
+                "DbtrAcct"
+            ],
+            "properties": {
+                "PmtId": {"$ref": "#/$defs/PaymentIdentification1"},
+                "PmtTpInf": {"$ref": "#/$defs/PaymentTypeInformation20"},
+                "InstdAmt": {"$ref": "#/$defs/ActiveOrHistoricCurrencyAndAmount"},
+                "ChrgBr": {"$ref": "#/$defs/ChargeBearerType1Code"},
+                "DrctDbtTx": {"$ref": "#/$defs/DirectDebitTransaction6"},
+                "UltmtCdtr": {"$ref": "#/$defs/PartyIdentification32"},
+                "DbtrAgt": {"$ref": "#/$defs/BranchAndFinancialInstitutionIdentification4"},
+                "DbtrAgtAcct": {"$ref": "#/$defs/CashAccount16"},
+                "Dbtr": {"$ref": "#/$defs/PartyIdentification32"},
+                "DbtrAcct": {"$ref": "#/$defs/CashAccount16"},
+                "UltmtDbtr": {"$ref": "#/$defs/PartyIdentification32"},
+                "InstrForCdtrAgt": {"type": "string"},
+                "Purp": {"$ref": "#/$defs/Purpose2Choice"},
+                "RgltryRptg": {
+                    "type": "array",
+                    "items": {"$ref": "#/$defs/RegulatoryReporting3"},
+                    "maxItems": 10,
+                    "minItems": 0
+                },
+                "Tax": {"$ref": "#/$defs/TaxInformation3"},
+                "RltdRmtInf": {
+                    "type": "array",
+                    "items": {"$ref": "#/$defs/RemittanceLocation2"},
+                    "maxItems": 10,
+                    "minItems": 0
+                },
+                "RmtInf": {"$ref": "#/$defs/RemittanceInformation5"}
+            }
+        },
+        "PaymentInstructionInformation4": {
+            "type": "object",
+            "required": [
+                "PmtInfId",
+                "PmtMtd",
+                "ReqdColltnDt",
+                "Cdtr",
+                "CdtrAcct",
+                "CdtrAgt",
+                "DrctDbtTxInf"
+            ],
+            "properties": {
+                "PmtInfId": {"type": "string"},
+                "PmtMtd": {"$ref": "#/$defs/PaymentMethod2Code"},
+                "BtchBookg": {"type": "boolean"},
+                "NbOfTxs": {"type": "string"},
+                "CtrlSum": {"type": "number"},
+                "PmtTpInf": {"$ref": "#/$defs/PaymentTypeInformation20"},
+                "ReqdColltnDt": {
+                    "type": "string",
+                    "format": "date"
+                },
+                "Cdtr": {"$ref": "#/$defs/PartyIdentification32"},
+                "CdtrAcct": {"$ref": "#/$defs/CashAccount16"},
+                "CdtrAgt": {"$ref": "#/$defs/BranchAndFinancialInstitutionIdentification4"},
+                "CdtrAgtAcct": {"$ref": "#/$defs/CashAccount16"},
+                "UltmtCdtr": {"$ref": "#/$defs/PartyIdentification32"},
+                "ChrgBr": {"$ref": "#/$defs/ChargeBearerType1Code"},
+                "ChrgsAcct": {"$ref": "#/$defs/CashAccount16"},
+                "ChrgsAcctAgt": {"$ref": "#/$defs/BranchAndFinancialInstitutionIdentification4"},
+                "CdtrSchmeId": {"$ref": "#/$defs/PartyIdentification32"},
+                "DrctDbtTxInf": {
+                    "type": "array",
+                    "items": {"$ref": "#/$defs/DirectDebitTransactionInformation9"},
+                    "minItems": 1
+                }
+            }
+        },
+        "CustomerDirectDebitInitiationV02": {
+            "type": "object",
+            "required": [
+                "GrpHdr",
+                "PmtInf"
+            ],
+            "properties": {
+                "GrpHdr": {"$ref": "#/$defs/GroupHeader39"},
+                "PmtInf": {
+                    "type": "array",
+                    "items": {"$ref": "#/$defs/PaymentInstructionInformation4"},
+                    "minItems": 1
+                }
+            }
+        },
+        "Document": {
+            "type": "object",
+            "required": ["CstmrDrctDbtInitn"],
+            "properties": {
+                "CstmrDrctDbtInitn": {"$ref": "#/$defs/CustomerDirectDebitInitiationV02"}
+            }
+        },
+        "Authorisation1Code": {
+            "type": "string",
+            "enum": [
+                "AUTH",
+                "FDET",
+                "FSUM",
+                "ILEV"
+            ]
+        },
+        "AddressType2Code": {
+            "type": "string",
+            "enum": [
+                "ADDR",
+                "PBOX",
+                "HOME",
+                "BIZZ",
+                "MLTO",
+                "DLVY"
+            ]
+        },
+        "NamePrefix1Code": {
+            "type": "string",
+            "enum": [
+                "DOCT",
+                "MIST",
+                "MISS",
+                "MADM"
+            ]
+        },
+        "PaymentMethod2Code": {
+            "type": "string",
+            "enum": ["DD"]
+        },
+        "Priority2Code": {
+            "type": "string",
+            "enum": [
+                "HIGH",
+                "NORM"
+            ]
+        },
+        "SequenceType1Code": {
+            "type": "string",
+            "enum": [
+                "FRST",
+                "RCUR",
+                "FNAL",
+                "OOFF"
+            ]
+        },
+        "CashAccountType4Code": {
+            "type": "string",
+            "enum": [
+                "CASH",
+                "CHAR",
+                "COMM",
+                "TAXE",
+                "CISH",
+                "TRAS",
+                "SACC",
+                "CACC",
+                "SVGS",
+                "ONDP",
+                "MGLD",
+                "NREX",
+                "MOMA",
+                "LOAN",
+                "SLRY",
+                "ODFT"
+            ]
+        },
+        "ChargeBearerType1Code": {
+            "type": "string",
+            "enum": [
+                "DEBT",
+                "CRED",
+                "SHAR",
+                "SLEV"
+            ]
+        },
+        "Frequency1Code": {
+            "type": "string",
+            "enum": [
+                "YEAR",
+                "MNTH",
+                "QURT",
+                "MIAN",
+                "WEEK",
+                "DAIL",
+                "ADHO",
+                "INDA"
+            ]
+        },
+        "RegulatoryReportingType1Code": {
+            "type": "string",
+            "enum": [
+                "CRED",
+                "DEBT",
+                "BOTH"
+            ]
+        },
+        "TaxRecordPeriod1Code": {
+            "type": "string",
+            "enum": [
+                "MM01",
+                "MM02",
+                "MM03",
+                "MM04",
+                "MM05",
+                "MM06",
+                "MM07",
+                "MM08",
+                "MM09",
+                "MM10",
+                "MM11",
+                "MM12",
+                "QTR1",
+                "QTR2",
+                "QTR3",
+                "QTR4",
+                "HLF1",
+                "HLF2"
+            ]
+        },
+        "RemittanceLocationMethod2Code": {
+            "type": "string",
+            "enum": [
+                "FAXI",
+                "EDIC",
+                "URID",
+                "EMAL",
+                "POST",
+                "SMSM"
+            ]
+        },
+        "DocumentType5Code": {
+            "type": "string",
+            "enum": [
+                "MSIN",
+                "CNFA",
+                "DNFA",
+                "CINV",
+                "CREN",
+                "DEBN",
+                "HIRI",
+                "SBIN",
+                "CMCN",
+                "SOAC",
+                "DISP",
+                "BOLD",
+                "VCHR",
+                "AROI",
+                "TSUT"
+            ]
+        },
+        "CreditDebitCode": {
+            "type": "string",
+            "enum": [
+                "CRDT",
+                "DBIT"
+            ]
+        },
+        "DocumentType3Code": {
+            "type": "string",
+            "enum": [
+                "RADM",
+                "RPIN",
+                "FXDR",
+                "DISP",
+                "PUOR",
+                "SCOR"
+            ]
+        }
+    }
+}
